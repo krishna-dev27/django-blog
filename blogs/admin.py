@@ -7,9 +7,9 @@ class BlogAdmin(admin.ModelAdmin):
         'slug': ('title',),
         
     }
-    list_display = ('author','title', 'is_featured')
+    list_display = ('author','title', 'is_featured','status')
     search_fields = ('id', 'title')
-    list_editable = ('is_featured',)
+    list_editable = ('is_featured','status')
 
 
 admin.site.register(Category)

@@ -13,7 +13,8 @@ def posts_by_category(request,category_id):
         return redirect('home')
     context = {
         'posts':posts,
-        'cname':cname
+        'cname':cname,
+        
     }
     return render(request, 'posts_by_category.html',context)
-    
+        

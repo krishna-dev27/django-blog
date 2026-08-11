@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h4 class="text-warning" style="letter-spacing: 2px;">Search term - <span class="text-dark">{{ data }}</span></h4>
+
+
+    <div class="row mb-2">
+      {% if filtered_blogs %}
+      {% for post in filtered_blogs %}
+      <div class="col-md-6">
+        <div class="card border-0">
+          <div class="card-body">
+            <h3><a href="{% url 'blogs' post.slug %}" class="text-dark">{{post.title}}</a></h3>
+            <small class="mb-1 text-muted">{{post.created_at | timesince}} ago | {{post.author}}</small>
+            <p class="card-text">{{post.blog_description | truncatewords:25}}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-6">
+      <div class="card border-0" >
+        <div class="card-body">
+          <h3>Post Title</h3>
+          <small class="mb-1 text-muted">Nov 11 | Author</small>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div> -->
+      {% endfor %}
+      {% else %}
+      <center class="m-4"><p>No postes found</p></center>
+      {% endif %}
+    </div>
+
+
+
+  </div>
+{% endblock %}

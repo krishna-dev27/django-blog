@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from blogs.models import Blog,Category
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 # Create your views here.
 def posts_by_category(request,category_id):
@@ -27,3 +28,14 @@ def blogs(request, slug):
     }
 
     return render(request, 'blogs.html', context)
+
+def search(request):
+    data = request.GET.get('keyword')
+    filtered_blogs = Blog.objects.filter(Q(title__icontains=data) | Q(blog_description__icontains=data) | Q(blog_body__icontains=data))
+    d={
+        'data':data,
+        'filtered_blogs':filtered_blogs,
+    }
+    #return HttpResponse(data)
+    
+    return render(request, 'search.html', d)
